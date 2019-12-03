@@ -3,7 +3,9 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh 'npm build'
+                sh 'npm config set unsafe-perm true'
+				sh 'npm install'
+				sh 'npm run-script build'
             }
         }
     }

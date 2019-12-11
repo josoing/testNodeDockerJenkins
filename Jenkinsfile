@@ -15,13 +15,13 @@ pipeline {
 		stage("Build") {
 			steps {
 				echo 'stage Build'
-				node('linux') {
+				// node('linux') {
 					echo 'linux'
 					checkout scm
 					sh ("chmod +x ./Cake/build.sh")
-					sh ("./Cake/build.sh --script ./Cake/DotnetBuild.cake --bootstrap")
-					sh ('./Cake/build.sh --script ./Cake/DotnetBuild.cake --target="PublishBinaries"')
-				}
+					sh ("./Cake/build.sh --script ./Cake/build.cake --bootstrap")
+					sh ('./Cake/build.sh --script ./Cake/build.cake --target="PublishBinaries"')
+				// }
 			}
 		}
 		stage('Publish Test Results') {

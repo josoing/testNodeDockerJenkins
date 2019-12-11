@@ -17,30 +17,11 @@ var buildDir = Directory("./build") + Directory(configuration);
 // TASKS
 //////////////////////////////////////////////////////////////////////
 
-Task("Clean")
-    .Does(() =>
-{
-    CleanDirectory(buildDir);
-});
+Task("AnExample")
+    .Does(() => 
+    {
+        Information("DEVOPS is a piece of cake. ;-)");       
+    });
 
-Task("Run-Unit-Tests")
-    .IsDependentOn("Build")
-    .Does(() =>
-{
-    NUnit3("./src/**/bin/" + configuration + "/*.Tests.dll", new NUnit3Settings {
-        NoResults = true
-        });
-});
 
-//////////////////////////////////////////////////////////////////////
-// TASK TARGETS
-//////////////////////////////////////////////////////////////////////
-
-Task("Default")
-    .IsDependentOn("Run-Unit-Tests");
-
-//////////////////////////////////////////////////////////////////////
-// EXECUTION
-//////////////////////////////////////////////////////////////////////
-
-RunTarget(target);
+RunTarget(Argument<string>("target", "AnExample"));

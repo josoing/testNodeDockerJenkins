@@ -42,6 +42,8 @@ fi
 # INSTALL CAKE
 ###########################################################################
 
+apt-get install libunwind8 icu-devtools
+
 CAKE_INSTALLED_VERSION=$(dotnet-cake --version 2>&1)
 
 if [ "$CAKE_VERSION" != "$CAKE_INSTALLED_VERSION" ]; then

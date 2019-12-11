@@ -42,7 +42,7 @@ fi
 # INSTALL CAKE
 ###########################################################################
 
-apt-get install libunwind8 icu-devtools
+sudo apt-get install libunwind8 icu-devtools
 
 CAKE_INSTALLED_VERSION=$(dotnet-cake --version 2>&1)
 

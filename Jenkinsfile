@@ -21,8 +21,9 @@ pipeline {
 					sh ('./Cake/build.sh --script ./Cake/build.cake --target="PublishBinaries"')
 				}*/
 				echo 'cake 4'
-				powershell ('echo "test "')
-				powershell ('./Cake/build.ps1 -Script ./Cake/build.cake --bootstrap')
+				powershell ('echo "test docker setup"')
+				powershell ('./Cake/build.ps1 -Script ./Cake/DockerBuild.cake --bootstrap')
+				powershell ('./Cake/build.ps1 -Script ./Cake/DockerBuild.cake -target 'Test' -ScriptArgs '-DockerRegistryPassword=Test')
 			}
 		}
 		stage('Publish Test Results') {

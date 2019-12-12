@@ -1,0 +1,33 @@
+{
+	"Registry" : {
+		"Url" : "dpr.od.rferl.org:9999",
+		"Username" : "pangea"
+	},
+	"Build" : {
+		"ComposeFilePath" : "../docker-compose.Release.yml",
+		"Images" : [
+			{
+			  "service": "singlesignonapi",
+			  "repository": "single-sign-on-api"
+			},
+			{
+			  "service": "identitysyncapi",
+			  "repository": "identity-sync-api"
+			}
+		]
+	},
+	"Deploy": {
+		"QA": {
+			"ComposeFilePaths" : [ "../DeploymentScripts/docker-compose.Release.yml", "../DeploymentScripts/docker-compose.QA.yml" ],
+			"EnvFilePath": "../DeploymentScripts/QA.env"
+		},
+		"STAGE": {
+			"ComposeFilePaths" : [ "../DeploymentScripts/docker-compose.Release.yml", "../DeploymentScripts/docker-compose.STAGE.yml" ],
+			"EnvFilePath": "../DeploymentScripts/STAGE.env"
+		},
+		"PROD" : {
+			"ComposeFilePaths" : [ "../DeploymentScripts/docker-compose.Release.yml", "../DeploymentScripts/docker-compose.PROD.yml" ],
+			"EnvFilePath": "../DeploymentScripts/PROD.env"
+		}
+	}
+}

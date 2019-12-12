@@ -212,6 +212,11 @@ Task("ModifyEnviromentFile")
         Information("Version tag is in {0}, is replaced with {1}", environmentFile.FullPath, context.Tags.FirstOrDefault());
     });
 
+Task("Test").Does(() =>
+{
+    Information("Test task screams D:");
+});
+
 Task("BuildImages")
     .IsDependentOn("SetupVersioning")
     .IsDependentOn("LoginDockerRegistry")

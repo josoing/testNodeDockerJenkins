@@ -20,7 +20,8 @@ pipeline {
 					sh ("./Cake/build.sh --script ./Cake/build.cake --bootstrap")
 					sh ('./Cake/build.sh --script ./Cake/build.cake --target="PublishBinaries"')
 				}*/
-				echo 'cake 3'
+				echo 'cake 4'
+				powershell ('echo "test "')
 				powershell ('./Cake/build.ps1 -Script ./Cake/build.cake --bootstrap')
 			}
 		}

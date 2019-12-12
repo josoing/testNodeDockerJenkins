@@ -14,14 +14,14 @@ pipeline {
     stages {	
 		stage("Build") {
 			steps {
-				echo 'stage Build'
 				/*node('linux') {
 					checkout scm
 					sh ("chmod +x ./Cake/build.sh")
 					sh ("./Cake/build.sh --script ./Cake/build.cake --bootstrap")
 					sh ('./Cake/build.sh --script ./Cake/build.cake --target="PublishBinaries"')
 				}*/
-				powershell ("./Cake/build.sh --script ./Cake/build.cake --bootstrap")
+				echo 'cake 2'
+				powershell ('./Cake/build.ps1 -Script ./Cake/DockerBuild.cake --bootstrap')
 			}
 		}
 		stage('Publish Test Results') {

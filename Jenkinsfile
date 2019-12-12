@@ -20,8 +20,8 @@ pipeline {
 					sh ("./Cake/build.sh --script ./Cake/build.cake --bootstrap")
 					sh ('./Cake/build.sh --script ./Cake/build.cake --target="PublishBinaries"')
 				}*/
-				echo 'cake 2'
-				powershell ('./Cake/build.ps1 -Script ./Cake/DockerBuild.cake --bootstrap')
+				echo 'cake 3'
+				powershell ('./Cake/build.ps1 -Script ./Cake/build.cake --bootstrap')
 			}
 		}
 		stage('Publish Test Results') {

@@ -23,7 +23,7 @@ pipeline {
 				echo 'cake 4'
 				powershell ('echo "test docker setup"')
 				powershell ('./Cake/build.ps1 -Script ./Cake/DockerBuild.cake --bootstrap')
-				powershell ('./Cake/build.ps1 -Script ./Cake/DockerBuild.cake -target 'Test' -ScriptArgs '-DockerRegistryPassword=Test')
+				powershell ("./Cake/build.ps1 -Script ./Cake/DockerBuild.cake -target 'Test' -ScriptArgs '-DockerRegistryPassword=Test'")
 			}
 		}
 		stage('Publish Test Results') {

@@ -15,18 +15,17 @@ pipeline {
 		stage("Build") {
 			steps {
 				echo 'stage Build'
-				// node('linux') {
-					echo 'linux'
+				/*node('linux') {
 					checkout scm
 					sh ("chmod +x ./Cake/build.sh")
 					sh ("./Cake/build.sh --script ./Cake/build.cake --bootstrap")
 					sh ('./Cake/build.sh --script ./Cake/build.cake --target="PublishBinaries"')
-				// }
+				}*/
+				powershell ("./Cake/build.sh --script ./Cake/build.cake --bootstrap")
 			}
 		}
 		stage('Publish Test Results') {
 			steps {
-				echo 'stage Publish Test Results'
 				node('linux') {
 					mstest testResultsFile: 'dist/Results/TestResults.xml'
 					cobertura autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: 'dist/Results/CodeCoverage.xml', conditionalCoverageTargets: '60, 0, 0', failUnhealthy: false, failUnstable: false, 

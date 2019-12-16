@@ -9,12 +9,20 @@ ENV PATH /app/node_modules/.bin:$PATH
 
 # install and cache app dependencies
 COPY package.json /app/package.json
+COPY tsconfig.json /app/tsconfig.json
+COPY webpack.config.js /app/webpack.config.js
+COPY webpack-prod.config.js /app/webpack-prod.config.js
+COPY yarn.lock /app/yarn.lock
+
 RUN npm config set unsafe-perm true
-RUN npm install
-RUN npm install react-scripts@3.0.1 -g
+RUN yarn config set unsafe-perm true
+RUN yarn config set registry http://npmjs.od.rferl.org:80/ -g
+RUN yarn config set '@babel:registry' https://registry.npmjs.org/ -g
+RUN yarn config set '@typescript-eslint:registry' https://registry.npmjs.org/ -g
 
 COPY . /app
-RUN npm run build
+RUN yarn
+RUN yarn build
 
 # production environment
 FROM nginx:1.16.0-alpine

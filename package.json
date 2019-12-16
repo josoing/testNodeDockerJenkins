@@ -1,31 +1,133 @@
 {
-  "name": "cmsfetest",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-scripts": "3.2.0"
+  "name": "pangea-cms-frontend",
+  "version": "0.0.1",
+  "description": "UI for the Pangea CMS",
+  "license": "SEE LICENSE IN <https://kb.pangea-cms.com/>",
+  "engines": {
+    "node": ">=6.0.0"
   },
+  "main": "./dist/index.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "build": "./node_modules/.bin/webpack -p --config=webpack-prod.config.js",
+    "build-debug": "./node_modules/.bin/webpack -p --config=webpack-debug.config.js",
+    "check-bundle": "node ./tools/buildVersionChecker.js",
+    "check-dependencies": "node ./tools/nodeModulesChecker.js",
+    "devserver": "./node_modules/.bin/webpack-dev-server --inline --history-api-fallback --port 8081",
+    "devserver-debug": "./node_modules/.bin/webpack-dev-server --config=webpack-debug.config.js --inline --history-api-fallback --port 8081",
+    "devserver-https": "./node_modules/.bin/webpack-dev-server --inline --history-api-fallback --https --port 8081",
+    "lint": "./node_modules/.bin/tslint --project ./",
+    "test": "./node_modules/.bin/jest",
+    "test:watch": "./node_modules/.bin/jest --watch"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
+  "jest": {
+    "globals": {
+      "__TS_CONFIG__": {
+        "module": "commonjs",
+        "jsx": "react"
+      }
+    },
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "moduleNameMapper": {
+      "^icons(.*)": "<rootDir>/images/icons$1"
+    },
+    "testRegex": "(/__tests__/.*\\.(test|spec))\\.(ts|tsx)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
     ]
+  },
+  "dependencies": {
+    "@material-ui/core": "4.2.1",
+    "@material-ui/icons": "4.2.1",
+    "@material-ui/lab": "^4.0.0-alpha.19",
+    "array-includes": "^3.0.3",
+    "classnames": "^2.2.5",
+    "core-decorators": "^0.17.0",
+    "dashjs": "^3.0.0",
+    "dom4": "^1.8.3",
+    "es6-shim": "^0.35.3",
+    "history": "^4.5.1",
+    "iframe-dnd-shim": "1.0.5",
+    "intersection-observer": "^0.5.0",
+    "isomorphic-fetch": "^2.2.1",
+    "jquery": "^3.4.1",
+    "jsdom": "^9.9.1",
+    "leaflet": "^1.5.1",
+    "lodash": "^4.17.4",
+    "mobile-drag-drop": "^2.1.0",
+    "moment": "^2.22.0",
+    "pg-face": "7.37.6",
+    "pg-router": "^1.0.5",
+    "qs": "^6.4.0",
+    "react": "16.8.4",
+    "react-day-picker": "^7.0.7",
+    "react-dnd": "^2.5.4",
+    "react-dnd-html5-backend": "^2.5.4",
+    "react-dom": "16.8.4",
+    "react-image-crop": "^8.4.0",
+    "react-onclickoutside": "6.8.0",
+    "react-redux": "^7.1.0",
+    "react-resize-detector": "^4.2.0",
+    "react-responsive": "^1.3.4",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "react-transition-group": "^2.2.1",
+    "redux-saga": "^0.15.6",
+    "reselect": "^2.5.4",
+    "xregexp": "^3.2.0"
+  },
+  "devDependencies": {
+    "@types/classnames": "^2.2.0",
+    "@types/core-decorators": "^0.10.32",
+    "@types/isomorphic-fetch": "^0.0.32",
+    "@types/jest": "^18.1.1",
+    "@types/jsdom": "^2.0.29",
+    "@types/leaflet": "^1.5.1",
+    "@types/lodash": "^4.14.52",
+    "@types/qs": "^6.2.31",
+    "@types/react": "16.8.8",
+    "@types/react-day-picker": "^5.3.0",
+    "@types/react-dnd": "^2.0.34",
+    "@types/react-dnd-html5-backend": "^2.1.8",
+    "@types/react-dom": "^16.0.7",
+    "@types/react-image-crop": "^8.1.0",
+    "@types/react-onclickoutside": "6.7.1",
+    "@types/react-redux": "^7.1.1",
+    "@types/react-responsive": "^1.1.6",
+    "@types/react-router": "^4.0.31",
+    "@types/react-router-dom": "^4.2.7",
+    "@types/react-router-redux": "^4.0.39",
+    "@types/react-transition-group": "^2.0.6",
+    "@types/xregexp": "^3.0.29",
+    "@typescript-eslint/eslint-plugin": "^2.0.0",
+    "@typescript-eslint/parser": "^2.0.0",
+    "circular-dependency-plugin": "^4.4.0",
+    "cross-env": "^5.0.0",
+    "css-loader": "^0.26.1",
+    "eslint": "^6.1.0",
+    "eslint-plugin-react": "^7.14.3",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^0.10.0",
+    "jest": "^18.1.0",
+    "klaw-sync": "^1.1.1",
+    "mk-sass-variables-loader": "0.0.11",
+    "node-sass": "^4.12.0",
+    "redux-devtools": "^3.4.1",
+    "sass-loader": "^6.0.6",
+    "semver": "^5.3.0",
+    "source-map-loader": "^0.2.1",
+    "style-loader": "^0.13.1",
+    "svg-inline-loader": "^0.8.0",
+    "ts-jest": "^18.0.3",
+    "ts-loader": "^3.5.0",
+    "typescript": "^3.1.0",
+    "url-loader": "^0.5.7",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.9.7",
+    "webpack-utf8-bom": "^1.1.3",
+    "worker-loader": "^2.0.0"
   }
 }

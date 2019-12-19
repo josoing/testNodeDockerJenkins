@@ -11,6 +11,7 @@ function App() {
           Edit <code>src/App.js</code> and save to reload. 
 		  Development of First Feature, finished
 		  Development of Second Feature, finished
+		  Development of Third Feature, finished
         </p>
 
         <a

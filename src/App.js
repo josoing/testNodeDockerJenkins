@@ -10,6 +10,7 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload. 
 		  Development of First Feature, finished
+		  Development of Second Feature, start
         </p>
 
         <a

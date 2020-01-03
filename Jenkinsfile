@@ -12,7 +12,7 @@ pipeline {
 		DOCKER_REGISTRY = 'dpr.od.rferl.org:9999'		
     }
     stages {	
-		stage("Build Only") {
+		stage("Build") {
 			/*
 			when {
 				branch 'feature/*'
@@ -29,10 +29,8 @@ pipeline {
 				}	
 				*/
 				withCredentials([usernamePassword(credentialsId: "${DOCKER_REGISTRY_CREDENTIALS}", usernameVariable: "DOCKER_REGISTRY_USERNAME", passwordVariable: "DOCKER_REGISTRY_PASSWORD")]) {
-					echo 'cake 4'
-					powershell ('echo "test docker setup x"')
 					powershell ('./Cake/build.ps1 -Script ./Cake/DockerBuild.cake --bootstrap')
-					powershell ("./Cake/build.ps1 -Script ./Cake/DockerBuild.cake -target 'Test' -ScriptArgs '-DockerRegistryPassword=Test'")
+					powershell ("./Cake/build.ps1 -Script ./Cake/DockerBuild.cake -target 'DockerComposeBuild'")
 				}
 			}
 		}

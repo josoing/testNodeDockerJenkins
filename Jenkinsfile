@@ -24,7 +24,7 @@ pipeline {
 				node('linux') {
 					withCredentials([usernamePassword(credentialsId: "${DOCKER_REGISTRY_CREDENTIALS}", usernameVariable: "DOCKER_REGISTRY_USERNAME", passwordVariable: "DOCKER_REGISTRY_PASSWORD")]) {
 						sh ("chmod +x ./Cake/build.sh")
-						sh ("./Cake/build.sh --script ./Cake/DockerBuild.cake -target 'BuildOnly'")
+						sh ("./Cake/build.sh --script ./Cake/DockerBuild.cake -target 'DockerComposeBuild'")
 					}
 				}	
 				*/

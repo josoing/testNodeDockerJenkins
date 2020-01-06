@@ -30,7 +30,7 @@ pipeline {
 				*/
 				withCredentials([usernamePassword(credentialsId: "${DOCKER_REGISTRY_CREDENTIALS}", usernameVariable: "DOCKER_REGISTRY_USERNAME", passwordVariable: "DOCKER_REGISTRY_PASSWORD")]) {
 					powershell ('./Cake/build.ps1 -Script ./Cake/DockerBuild.cake --bootstrap')
-					powershell ("./Cake/build.ps1 -Script ./Cake/DockerBuild.cake -target 'DockerComposeBuild'")
+					powershell ("./Cake/build.ps1 -Script ./Cake/DockerBuild.cake")
 				}
 			}
 		}

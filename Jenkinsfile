@@ -13,29 +13,28 @@ pipeline {
     }
     stages {	
 		stage("Build") {
-			steps {
-				/*node('linux') {
-					checkout scm
-					sh ("chmod +x ./Cake/build.sh")
-					sh ("./Cake/build.sh --script ./Cake/build.cake --bootstrap")
-					sh ('./Cake/build.sh --script ./Cake/build.cake --target="PublishBinaries"')
-				}*/
-				echo 'cake 4'
-				powershell ('echo "test docker setup"')
-				powershell ('./Cake/build.ps1 -Script ./Cake/DockerBuild.cake --bootstrap')
-				powershell ("./Cake/build.ps1 -Script ./Cake/DockerBuild.cake -target 'Test' -ScriptArgs '-DockerRegistryPassword=Test'")
+			/*
+			when {
+				branch 'feature/*'
+				branch 'bugfix/*'
 			}
-		}
-		stage('Publish Test Results') {
+			*/
 			steps {
+				/*
 				node('linux') {
-					mstest testResultsFile: 'dist/Results/TestResults.xml'
-					cobertura autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: 'dist/Results/CodeCoverage.xml', conditionalCoverageTargets: '60, 0, 0', failUnhealthy: false, failUnstable: false, 
-						lineCoverageTargets: '60, 0, 0', maxNumberOfBuilds: 0, methodCoverageTargets: '60, 0, 0', onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false
+					withCredentials([usernamePassword(credentialsId: "${DOCKER_REGISTRY_CREDENTIALS}", usernameVariable: "DOCKER_REGISTRY_USERNAME", passwordVariable: "DOCKER_REGISTRY_PASSWORD")]) {
+						sh ("chmod +x ./Cake/build.sh")
+						sh ("./Cake/build.sh --script ./Cake/DockerBuild.cake -target 'DockerComposeBuild'")
+					}
+				}	
+				*/
+				withCredentials([usernamePassword(credentialsId: "${DOCKER_REGISTRY_CREDENTIALS}", usernameVariable: "DOCKER_REGISTRY_USERNAME", passwordVariable: "DOCKER_REGISTRY_PASSWORD")]) {
+					powershell ('./Cake/build.ps1 -Script ./Cake/DockerBuild.cake --bootstrap')
+					powershell ("./Cake/build.ps1 -Script ./Cake/DockerBuild.cake")
 				}
 			}
 		}
-		stage("Push Docker Images") {
+		stage("Build and Push Docker Images") {
 			when {
 				not {
 					branch 'feature/*'

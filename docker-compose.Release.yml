@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+  cmsfetest:
+    container_name: cmsfetest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8080:80'
+    environment:
+      - NODE_ENV=production
+    healthcheck:
+      timeout: 5s
+      interval: 5s
+      retries: 3
+      test: curl --fail http://localhost:8080 || exit 1

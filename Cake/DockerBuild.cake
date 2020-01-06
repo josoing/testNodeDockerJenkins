@@ -155,8 +155,8 @@ Task("PushDockerImages")
             foreach (var tag in image.Tags)
             {
                 var imageReference = string.Format("{0}/{1}/{2}:{3}", context.Registry.Url, context.Registry.Username, image.Repository, tag);
-                Information("Docker Image {0} is about to be pushed to {1} with Tag: {2}",imageReference, context.Registry.Url, tag);           
-                DockerPush(imageReference);
+                Information("TEST NO PUSH Docker Image {0} is about to be pushed to {1} with Tag: {2}",imageReference, context.Registry.Url, tag);           
+                //DockerPush(imageReference);
             }
         }
     });
@@ -211,11 +211,6 @@ Task("ModifyEnviromentFile")
 
         Information("Version tag is in {0}, is replaced with {1}", environmentFile.FullPath, context.Tags.FirstOrDefault());
     });
-
-Task("Test").Does(() =>
-{
-    Information("Test task screams D:");
-});
 
 Task("BuildImages")
     .IsDependentOn("SetupVersioning")

@@ -7,12 +7,8 @@
 		"ComposeFilePath" : "../docker-compose.Release.yml",
 		"Images" : [
 			{
-			  "service": "singlesignonapi",
-			  "repository": "single-sign-on-api"
-			},
-			{
-			  "service": "identitysyncapi",
-			  "repository": "identity-sync-api"
+			  "service": "cmsfetest",
+			  "repository": "cmsfetest"
 			}
 		]
 	},

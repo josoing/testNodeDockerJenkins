@@ -34,7 +34,7 @@ pipeline {
 				}
 			}
 		}
-		stage("Build and Push Docker Images") {
+		/*stage("Build and Push Docker Images") {
 			when {
 				not {
 					branch 'feature/*'
@@ -51,7 +51,7 @@ pipeline {
 					}
 				}			    
 			}
-		}
+		}*/
 		stage ('Deploy to Testing'){
 			when {
 				not {

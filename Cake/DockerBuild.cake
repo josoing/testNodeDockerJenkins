@@ -105,7 +105,8 @@ Task("DockerComposeBuild")
         DockerComposeBuild(new DockerComposeBuildSettings()
         {
             Files = new string[] { context.Build.ComposeFilePath },
-            EnvironmentVariables = new Dictionary<string, string> { { "VERSION_TAG", "dev" } }
+            EnvironmentVariables = new Dictionary<string, string> { { "VERSION_TAG", "dev" } },
+            ProjectName = "TestProjectName"
         });
     });
 
@@ -142,6 +143,7 @@ Task("TagDockerImages")
                 var registryReference = string.Format("{0}/{1}/{2}:{3}", context.Registry.Url, context.Registry.Username, image.Repository, tag);
                 Information("imageReference:" + imageReference);
                 Information("registryReference:" + registryReference);
+                Information(DirectoryPath.GetDirectoryName());
                 DockerTag(imageReference, registryReference);
             }
         }        

@@ -105,7 +105,7 @@ Task("DockerComposeBuild")
         DockerComposeBuild(new DockerComposeBuildSettings()
         {
             Files = new string[] { context.Build.ComposeFilePath },
-            ProjectName = string.Format("{0}/{1}/", context.Registry.Url, context.Registry.Username);
+            ProjectName = string.Format("{0}/{1}/", context.Registry.Url, context.Registry.Username)
         });
     });
 

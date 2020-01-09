@@ -143,7 +143,6 @@ Task("TagDockerImages")
                 var registryReference = string.Format("{0}/{1}/{2}:{3}", context.Registry.Url, context.Registry.Username, image.Repository, tag);
                 Information("imageReference:" + imageReference);
                 Information("registryReference:" + registryReference);
-                Information(DirectoryPath.GetDirectoryName());
                 DockerTag(imageReference, registryReference);
             }
         }        

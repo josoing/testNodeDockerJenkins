@@ -106,7 +106,7 @@ Task("DockerComposeBuild")
         {
             Files = new string[] { context.Build.ComposeFilePath },
             EnvironmentVariables = new Dictionary<string, string> { { "VERSION_TAG", "dev" } },
-            ProjectName = "cmsfetest"
+            ProjectName = ""
         });
     });
 

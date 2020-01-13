@@ -106,7 +106,7 @@ Task("DockerComposeBuild")
         {
             Files = new string[] { context.Build.ComposeFilePath },
             EnvironmentVariables = new Dictionary<string, string> { { "VERSION_TAG", "dev" } },
-            ProjectName = string.Format("{0}/{1}/{2}", context.Registry.Url, context.Registry.Username, "cmsfetest")
+            ProjectName = "cmsfetest"
         });
     });
 
@@ -122,7 +122,7 @@ Task("TagDockerImages")
         var images = context.Build.Images;
         foreach (var image in images)
         {
-            var imageReference = string.Format("{0}/{1}/{2}:{3}", context.Registry.Url, context.Registry.Username, image.Repository, "dev");
+            var imageReference = "cmsfetest";
             if (versionOutput.BranchName.Equals("master", StringComparison.OrdinalIgnoreCase))
             {
                 

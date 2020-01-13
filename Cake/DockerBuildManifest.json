@@ -5,6 +5,7 @@
 	},
 	"Build" : {
 		"ComposeFilePath" : "../docker-compose.Release.yml",
+		"ProjectName": "cmsfetest",
 		"Images" : [
 			{
 			  "service": "cmsfetest",

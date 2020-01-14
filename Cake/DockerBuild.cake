@@ -13,6 +13,9 @@ using System.Linq;
 var target = Argument("target", "BuildImages");
 var environment = Argument<string>("environment", "QA");
 var manifestPath = Argument("manifest", "DockerBuildManifest.json");
+//used for Cake DockerComposeBuild names container as DockerComposeBuildSettings ProjectName underscore docker-compose container_name
+//without setting ProjectName folder name would be used in naming, which in case of JENKINS build can be totally random
+string projectName = "cmsfetest";
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // SETUP Docker Build Configuration
@@ -106,7 +109,7 @@ Task("DockerComposeBuild")
         {
             Files = new string[] { context.Build.ComposeFilePath },
             EnvironmentVariables = new Dictionary<string, string> { { "VERSION_TAG", "dev" } },
-            ProjectName = "cmsfetest"
+            ProjectName = projectName
         });
     });
 
@@ -123,7 +126,7 @@ Task("TagDockerImages")
         foreach (var image in images)
         {
             //var imageReference = string.Format("{0}/{1}/{2}:{3}", context.Registry.Url, context.Registry.Username, image.Repository, "dev");
-            var imageReference = string.Format("{0}_{1}", "cmsfetest", image.Repository);
+            var imageReference = string.Format("{0}_{1}", projectName, image.Repository);
             if (versionOutput.BranchName.Equals("master", StringComparison.OrdinalIgnoreCase))
             {
                 

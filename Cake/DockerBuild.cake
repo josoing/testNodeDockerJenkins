@@ -145,8 +145,6 @@ Task("TagDockerImages")
             foreach (var tag in image.Tags)
             {
                 var registryReference = string.Format("{0}/{1}/{2}:{3}", context.Registry.Url, context.Registry.Username, image.Repository, tag);
-                Information("imageReference:" + imageReference);
-                Information("registryReference:" + registryReference);
                 DockerTag(imageReference, registryReference);
             }
         }        
@@ -162,8 +160,8 @@ Task("PushDockerImages")
             foreach (var tag in image.Tags)
             {
                 var imageReference = string.Format("{0}/{1}/{2}:{3}", context.Registry.Url, context.Registry.Username, image.Repository, tag);
-                Information("TEST NO PUSH Docker Image {0} is about to be pushed to {1} with Tag: {2}",imageReference, context.Registry.Url, tag);           
-                //DockerPush(imageReference);
+                Information("TEST PUSH Docker Image {0} is about to be pushed to {1} with Tag: {2}",imageReference, context.Registry.Url, tag);           
+                DockerPush(imageReference);
             }
         }
     });
